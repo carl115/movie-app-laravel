@@ -2,32 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MovieRequest;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
+    public function index()
+    {
+        $movies = Movie::all()->load('category', 'stars');
+        return view('index', compact('movies'));
+    }
+
     public function getMovies()
     {
-        return 'Movies';
+        $movies = Movie::all();
+        return response()->json($movies->load('category', 'stars'), 200);
     }
 
-    public function getMovie()
+    public function getMovie(Movie $movie)
     {
-        return 'Movie';
+        return response()->json($movie->load('category', 'stars'), 200);
     }
 
-    public function create()
+    public function create(MovieRequest $request)
     {
-        return 'Create movie';
+        Movie::create($request->all());
+        return response()->json([
+            'success' => true,
+            'message' => 'Movie created successfully'
+        ], 201);
     }
 
-    public function update()
+    public function update(MovieRequest $request, Movie $movie)
     {
-        return 'Update movie';
+        $movie->update($request->all());
+        return response()->json([
+            'success' => true,
+            'message' => 'Movie updated successfully'
+        ], 200);
     }
 
-    public function delete()
+    public function delete(Movie $movie)
     {
-        return 'Delete movie';
+        $movie->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Movie deleted successfully'
+        ], 200);
     }
 }

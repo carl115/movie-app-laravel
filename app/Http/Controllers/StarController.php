@@ -2,32 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Star;
 use Illuminate\Http\Request;
 
 class StarController extends Controller
 {
+    /*
     public function getStars()
     {
-        return 'Stars';
+        $stars = Star::all();
+        return response()->json($stars, 200);
     }
+    */
 
+    /*
     public function getStar()
     {
         return 'Star';
     }
+    */
 
-    public function create()
+    public function create(Request $request)
     {
-        return 'Create star';
+        Star::create($request->all());
+        return response()->json([
+            'success' => true,
+            'message' => 'Review send'
+        ], 200);
     }
 
-    public function update()
+    public function update(Request $request, Star $star)
     {
-        return 'Update star';
+        $star->update($request->all());
+        return response()->json([
+            'success' => true,
+            'message' => 'Review updated'
+        ], 200);
     }
 
-    public function delete()
+    public function delete(Star $star)
     {
-        return 'Delete star';
+        $star->delete();
+        return response()->json([
+            'success' => true,
+            'nessage' => 'Review deleted'
+        ], 200);
     }
 }

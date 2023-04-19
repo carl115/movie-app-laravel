@@ -1,9 +1,14 @@
 import './bootstrap';
 import { createApp } from 'vue';
 
-const app = createApp();
+import MovieList from './pages/MovieList.vue'
+import Navigation from './components/Nav.vue'
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+const app = createApp({
+    components: {
+        MovieList,
+        Navigation
+    }
+});
 
 app.mount('#app');

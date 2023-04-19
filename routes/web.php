@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /* Login */
@@ -53,8 +54,12 @@ Route::controller(VerificationController::class)->group(function () {
 });
 /*-/-*/
 
+Route::get('/', [MovieController::class, 'index'])->name('movies.index');
+
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

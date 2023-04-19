@@ -2,35 +2,83 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    /*
     public function getCategories()
     {
         $categories = Category::all();
-        //dd($categories);
-        return response()->json($categories->load('movie'), 200);
+        return response()->json($categories, 200);
+    }
+    */
+
+    public function getCategoriesMovies()
+    {
+        $categories = Category::all()->load('movies');
+        return response()->json($categories, 200);
     }
 
-    public function getCategory()
+    /*
+    public function getCategory(Category $category)
     {
-        return 'Category';
+        return response()->json($category, 200);
+    }
+    */
+
+    public function getCategoryMovies(Category $category)
+    {
+        return response()->json($category->load('movies'), 200);
     }
 
-    public function create()
+    public function create(CategoryRequest $request)
     {
-        return 'Create category';
+        try {
+            Category::create($request->all());
+            return response()->json([
+                'success' => true,
+                'message' => 'Category created successfully'
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th
+            ], 500);
+        }
     }
 
-    public function update()
+    public function update(CategoryRequest $request, Category $category)
     {
-        return 'Update category';
+        try {
+            $category->update($request->all());
+            return response()->json([
+                'success' => true,
+                'message' => 'Category updated successfully'
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th
+            ], 500);
+        }
     }
 
-    public function delete()
+    public function delete(Category $category)
     {
-        return 'Delete category';
+        try {
+            $category->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Category deleted successfully'
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th
+            ], 500);
+        }
     }
 }

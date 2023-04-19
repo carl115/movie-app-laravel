@@ -4,5 +4,9 @@
 // Variables
 @import 'variables';
 
+@import './components/card_movie';
+
+@import './views/movie_list';
+
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';

@@ -11,8 +11,7 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::create([
-            'name' => 'Terror',
-            'movie_id' => 1
+            'name' => 'Action',
         ]);
     }
 }

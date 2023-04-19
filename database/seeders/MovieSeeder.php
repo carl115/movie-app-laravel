@@ -13,20 +13,18 @@ class MovieSeeder extends Seeder
     public function run(): void
     {
         Movie::create([
-            'title' => 'Lorem insut dolor',
-            'synopsis' => 'lorem insut dolor, tras',
-            'premiere_date' => '2012-04-03'
+            'image' => 'https://misionimposibleimage.com',
+            'video' => 'https://misionimposiblevideo.com',
+            'title' => 'Mision imposible 3',
+            'synopsis' => 'Es una mision que consiste en...',
+            'premiere_date' => '2012-04-03',
+            'category_id' => 1
         ]);
 
         Star::create([
-            'points' => 2,
+            'points' => 4,
             'movie_id' => 1,
             'user_id' => 1,
-        ]);
-
-        Video::create([
-            'uri' => 'http://the-movie-video.com',
-            'movie_id' => 1,
         ]);
     }
 }

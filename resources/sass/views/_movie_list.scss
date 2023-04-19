@@ -1,0 +1,7 @@
+.movie-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 40px 0;
+    justify-items: center;
+    align-items: center;
+}

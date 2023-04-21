@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} @yield('title')</title>
+    <title>Dashboard @yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -17,12 +17,8 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    <div id="app">
-        @include('includes.nav')
-
-        <main style="background: #222222; padding: 20px 0;">
-            @yield('content')
-        </main>
+    <div id="dashboard" style="background: #00152B; height: 100vh;">
+        @yield('content')
     </div>
 </body>
 </html>

@@ -3,8 +3,16 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\StarController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+Route::group(
+    ['prefix' => '/users', 'controller' => UserController::class],
+    function () {
+        Route::get('/{user}', 'getUser');
+    }
+);
 
 Route::group(
     ['prefix' => '/categories', 'controller' => CategoryController::class],function () {

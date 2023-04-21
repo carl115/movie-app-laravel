@@ -55,6 +55,9 @@ Route::controller(VerificationController::class)->group(function () {
 /*-/-*/
 
 Route::get('/', [MovieController::class, 'index'])->name('movies.index');
+Route::get('/movie/{id}', [MovieController::class, 'showMovie'])->name('movies.movie');
+
+Route::view('/dashboard', 'admin.index')->name('admin.index');
 
 /*
 Route::get('/', function () {

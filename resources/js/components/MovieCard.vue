@@ -1,34 +1,20 @@
 <template>
-    <div class="card-movie">
-        <img class="card-movie__image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWPcBYzf3x5iMzU-HvziAwbBWbrmTAxh5k8ErcNQSQisj73lc0" alt="movie image" />
+    <div class="card-movie" @click="openMovie">
+        <img class="card-movie__image" :src="movie.image" alt="movie image" />
         <div class="card-movie__container">
-            <p class="fs-5 mb-2">Misión imposible III</p>
-            <span class="bg-primary p-1 px-2 rounded">Action</span>
+            <p class="fs-5 mb-2">{{ movie.title }}</p>
+            <span class="bg-primary p-1 px-2 rounded">{{ movie.category.name }}</span>
             <div class="mt-2">
-                <star-solid></star-solid>
-                <star-solid></star-solid>
-                <star-solid></star-solid>
-                <star-solid></star-solid>
-                <star-regular></star-regular>
-                {{ stars }} / 5
+                <star-solid v-for="star in starsWin"></star-solid>
+                <star-regular v-for="star in starsLost"></star-regular>
+                {{ starsWin }} / 5
             </div>
-            <p>2006-05-04</p>
+            <p>{{ movie.premiere_date }}</p>
             <div class="mt-3">
                 <strong>Synopsis</strong>
-                <p>La película empieza con Ethan Hunt (Tom Cruise) esposado en una silla y al frente de él se encuentra Julia (Michelle Monaghan) también esposada y con la boca tapada...</p>
+                <p>{{ movie.synopsis }}</p>
             </div>
         </div>
-        <!--
-        <p>{{ movie.image }}</p>
-        <p>{{ movie.video }}</p>
-        <p>{{ movie.title }}</p>
-        <p>{{ movie.synopsis }}</p>
-        <p>{{ movie.premiere_date }}</p>
-        <p>{{ movie.category.name }}</p>
-        <div v-for="(review, index) in movie.stars" :key="index">
-            <p>{{ review.points }}</p>
-        </div>
-        -->
     </div>
 </template>
 
@@ -40,12 +26,47 @@ export default {
     props: ['movie'],
     data() {
         return {
-            stars: 4
+            starsWin: 0,
+            starsLost: 0
         } 
     },
     components: {
         StarSolid,
         StarRegular
+    },
+    created() {
+        this.setReview();
+        this.shortSynopsis();
+    },
+    methods: {
+        openMovie() {
+            window.location.replace(`/movie/${this.movie.id}`)
+        },
+        setReview() {
+            let starsResult = 0
+            let count = 0
+
+            for (let i = 1; i <= 5; i++) {
+                let result = this.filterReview(this.movie.stars, i).length
+                
+                if(starsResult < result) {
+                    starsResult = result
+                    this.starsWin = i
+                    count = i
+                }
+            }
+
+            while (count < 5) {
+                count++
+                this.starsLost++
+            }
+        },
+        shortSynopsis() {
+            this.movie.synopsis = this.movie.synopsis.slice(0, 145) + '...';
+        },
+        filterReview(array, number) {
+            return array.filter(obj => obj.points === number);
+        }
     }
 }
 </script>

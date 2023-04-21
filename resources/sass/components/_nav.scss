@@ -1,0 +1,48 @@
+%links {
+    text-decoration: none;
+    color: #ffffff;
+    position: relative;
+
+    &:hover {
+        color: #ababab;
+    }
+}
+
+.navigation {
+    background: #404040; 
+    padding: 10px 20px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+
+    &__logo {
+        @extend %links;
+        font-size: 26px;
+    }
+
+    &__links {
+        width: 108px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        a {
+            @extend %links;
+            font-size: 16px;
+        }
+    }
+
+    &__dropdown {
+        background: #343434;
+        padding: 4px 10px;
+        border: 1px solid #cacaca;
+        border-radius: 5px;
+        position: absolute;
+        top: 50px;
+        z-index: 10;
+
+        a {
+            @extend %links;
+        }
+    }
+}

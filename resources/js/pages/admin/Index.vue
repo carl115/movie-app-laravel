@@ -1,9 +1,8 @@
 <template>
     <div>
+        <!--
         <nav :class="`nav-dashboard ${hiddeNav}`">
-            <!--
-                <div class="nav-dashboard__content d-flex flex-column px-4 py-2 position-relative">
-            -->
+            <button class="nav-dashboard__logo" @click="redirect">MVS</button>
             <div class="nav-dashboard__content d-flex flex-column position-relative">
                 <button class="nav-dashboard__link">
                     <font-awesome-icon icon="fa-solid fa-users" />
@@ -23,6 +22,7 @@
                 </button>
             </div>
         </nav>
+        -->
     </div>
 </template>
 
@@ -50,6 +50,9 @@ export default {
     methods: {
         openNav() {
             this.open = !this.open
+        },
+        redirect() {
+            window.location.replace('/')
         }
     }
 }

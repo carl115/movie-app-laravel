@@ -2,7 +2,6 @@
     background: #003165;
     width: 230px;
     height: 100vh;
-    position: absolute;
     transition: all 350ms;
     overflow: hidden;
 
@@ -47,14 +46,17 @@
         bottom: -850px;
     }
 
+    &__logo {
+        background: transparent;
+        width: 100%;
+        margin: 10px 0 30px 0;
+        color: #ffffff;
+        font-size: 23px;
+        border: none;
+    }
+
     &--active {
         width: 70px;
-
-        /*
-        .nav-dashboard__content {
-            align-items: center;
-        }
-        */
 
         .nav-dashboard__link {
             span {

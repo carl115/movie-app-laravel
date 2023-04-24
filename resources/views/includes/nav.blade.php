@@ -13,6 +13,9 @@
         </template>
     @else
         <template #dropdown>
+            @if (Auth::user())
+                <a href="{{ route('admin.index') }}">Admin</a>
+            @endif
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 Logout
             </a>

@@ -17,8 +17,12 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    <div id="dashboard" style="background: #00152B; height: 100vh;">
-        @yield('content')
+    <div id="dashboard" style="display: flex">
+        <admin-nav></admin-nav>
+
+        <main style="background: #00152B; width: 100%; height: 100vh; overflow: hidden;">
+            @yield('content')
+        </main>
     </div>
 </body>
 </html>

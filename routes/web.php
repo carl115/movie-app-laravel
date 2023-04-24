@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\ConfirmPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -54,15 +55,17 @@ Route::controller(VerificationController::class)->group(function () {
 });
 /*-/-*/
 
+/* ADMIN */
+Route::group(
+    ['prefix' => 'admin', 'controller' => AdminController::class],
+    function() {
+        Route::get('/', 'index')->name('admin.index');
+        Route::get('/users', 'users')->name('admin.users');
+    }
+);
+/*-/-*/
+
 Route::get('/', [MovieController::class, 'index'])->name('movies.index');
 Route::get('/movie/{id}', [MovieController::class, 'showMovie'])->name('movies.movie');
-
-Route::view('/dashboard', 'admin.index')->name('admin.index');
-
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

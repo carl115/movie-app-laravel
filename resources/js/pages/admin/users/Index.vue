@@ -1,6 +1,9 @@
 <template>
     <div class="p-3 text-white">
-        <table id="example" class="table text-white">
+        <button type="button" class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="create">
+            Add User
+        </button>
+        <table id="usersTable" class="table text-white">
             <thead>
                 <tr>
                     <th>Name</th>    
@@ -10,53 +13,51 @@
             </thead>
             <tbody>
                 <tr v-for="(user, index) in users" :key="index">
-                    <td v-if="!isEdit">
-                        {{ user.name }}
-                    </td>
-                    <td v-else>
-                        <!--
-                        <input type="text" v-model="form.user.name" />
-                        -->
-                    </td>
-                    <td v-if="!isEdit">
-                        {{ user.email }}
-                    </td>
-                    <td v-else>
-                        <input type="text" v-model="form.user.email" />
-                    </td>
-                    <td class="d-flex">
-                        <button class="btn btn-primary me-2" @click="update">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <tr v-if="!users">
-                    <td>
-                        <div class="spinner-border" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </td>
+                    <user-field :user="user"></user-field>
                 </tr>
             </tbody>
         </table>
+        <user-modal></user-modal>
+        <loading v-if="loading"></loading>
     </div>
 </template>
 
 <script>
+import Loading from '../../../components/Loading.vue'
+import UserField from '../../../components/admin/users/UserField.vue'
+import UserModal from '../../../components/admin/users/Modal.vue'
+
 export default {
-    props: ['users'],
     data() {
         return {
-            isEdit: false
+            users: [],
+            loading: false
         }
     },
-    mounted() {
-        $(document).ready(function () {
-            $('#example').DataTable();
-        });
+    components: {
+        UserField,
+        Loading,
+        UserModal
+    },
+    created() {
+        this.getUsers()
     },
     methods: {
-        update() {
-            this.isEdit = true
+        mountTable() {
+            $(document).ready(function () {
+                $('#usersTable').DataTable();
+            });
+        },
+        async getUsers() {
+            this.loading = true
+
+            const res = await axios.get('/api/users')
+
+            this.users = res.data
+
+            this.loading = false
+
+            this.mountTable()
         }
     }
 }

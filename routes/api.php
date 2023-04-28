@@ -10,7 +10,11 @@ use Illuminate\Support\Facades\Route;
 Route::group(
     ['prefix' => '/users', 'controller' => UserController::class],
     function () {
+        Route::get('/', 'getUsers');
         Route::get('/{user}', 'getUser');
+        Route::post('/', 'create');
+        Route::put('/{user}', 'update');
+        Route::delete('/{user}', 'delete');
     }
 );
 

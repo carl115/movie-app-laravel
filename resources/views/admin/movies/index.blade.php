@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Users')
+@section('title', 'Movies')
 
 @section('content')
-    <users-admin></users-admin>
+    <movies-admin></movies-admin>
 @endsection

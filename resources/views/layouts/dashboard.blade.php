@@ -18,7 +18,7 @@
 </head>
 <body>
     <div id="dashboard" style="display: flex">
-        <admin-nav></admin-nav>
+        @include('includes.nav-admin')
 
         <main style="background: #00152B; width: 100%; height: 100vh; overflow: hidden;">
             @yield('content')

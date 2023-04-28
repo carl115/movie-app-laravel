@@ -1,16 +1,16 @@
 <template>
     <nav :class="`nav-dashboard ${hiddeNav}`">
-        <button class="nav-dashboard__logo" @click="redirect">MVS</button>
+        <button class="nav-dashboard__logo" @click="redirect('/')">MVS</button>
         <div class="nav-dashboard__content d-flex flex-column position-relative">
-            <button class="nav-dashboard__link">
+            <button class="nav-dashboard__link" @click="redirect(routes.userRoute.url)">
                 <font-awesome-icon icon="fa-solid fa-users" />
-                <span>Users</span>
+                <span>{{ routes.userRoute.name }}</span>
             </button>
-            <button class="nav-dashboard__link">
+            <button class="nav-dashboard__link" @click="redirect">
                 <font-awesome-icon icon="fa-solid fa-clapperboard" />
                 <span>Movies</span>
             </button>
-            <button class="nav-dashboard__link">
+            <button class="nav-dashboard__link" @click="redirect">
                 <font-awesome-icon icon="fa-solid fa-tags" />
                 <span>Categories</span>
             </button>
@@ -30,6 +30,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faUsers, faClapperboard, faTags, faArrowLeftLong, faArrowRightLong)
 
 export default {
+    props: ['routes'],
     data() {
         return {
             open: false
@@ -47,8 +48,8 @@ export default {
         openNav() {
             this.open = !this.open
         },
-        redirect() {
-            window.location.replace('/')
+        redirect(url) {
+            window.location.replace(url)
         }
     }
 }

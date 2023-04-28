@@ -8,6 +8,8 @@ import Navigation from './components/Nav.vue'
 import AdminNav from './components/admin/AdminNav.vue'
 import AdminIndex from './pages/admin/Index.vue'
 import UsersAdmin from './pages/admin/users/Index.vue'
+import MoviesAdmin from './pages/admin/movies/Index.vue'
+import CategoriesAdmin from './pages/admin/categories/Index.vue'
 
 const app = createApp({
     components: {
@@ -22,7 +24,9 @@ const dashboard = createApp({
     components: {
         AdminNav,
         AdminIndex,
-        UsersAdmin
+        UsersAdmin,
+        MoviesAdmin,
+        CategoriesAdmin
     }
 });
 dashboard.mount('#dashboard')

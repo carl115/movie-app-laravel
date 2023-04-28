@@ -61,6 +61,8 @@ Route::group(
     function() {
         Route::get('/', 'index')->name('admin.index');
         Route::get('/users', 'users')->name('admin.users');
+        Route::get('/movies', 'movies')->name('admin.movies');
+        Route::get('/categories', 'categories')->name('admin.categories');
     }
 );
 /*-/-*/
